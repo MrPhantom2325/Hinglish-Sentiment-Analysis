@@ -1,0 +1,4 @@
+model,tokenizer,vocab size,mean,median,p95,p99,max,share > 128
+mbert,bert-base-multilingual-cased,119547,34.53378571428571,36.0,47.0,54.0,79,0.00%
+muril,google/muril-base-cased,197258,31.275285714285715,32.0,43.0,52.0,78,0.00%
+hingbert,l3cube-pune/hing-bert,30522,34.29235714285714,35.0,47.0,51.0,85,0.00%

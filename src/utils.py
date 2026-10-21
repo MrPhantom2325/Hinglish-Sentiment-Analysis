@@ -21,6 +21,9 @@ def setup_logging(level: int = logging.INFO) -> None:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
         datefmt="%H:%M:%S",
     )
+    # Hugging Face downloads log every HTTP request at INFO; keep them quiet.
+    for noisy in ("httpx", "httpx2", "httpcore", "huggingface_hub", "urllib3"):
+        logging.getLogger(noisy).setLevel(logging.WARNING)
 
 
 def load_config(path: str | Path | None = None) -> dict[str, Any]:
