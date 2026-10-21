@@ -1,0 +1,29 @@
+# --- data (never committed) ---
+data/raw/
+data/processed/
+
+# --- run outputs ---
+results/preds/*
+!results/preds/.gitkeep
+# Run JSONs are small; tracked for now. Uncomment to stop tracking them:
+# results/metrics/*.json
+checkpoints/
+outputs/
+wandb/
+runs/
+
+# --- archives (e.g. hinglish_code.zip for Colab) ---
+*.zip
+
+# --- python / env ---
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.env
+
+# --- OS ---
+.DS_Store

@@ -1,0 +1,63 @@
+# Central config. All paths are relative to the repo root unless absolute.
+# CLI flags (e.g. --data_dir / --out_dir) override these paths.
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  results_dir: results
+  # Raw file names inside raw_dir (original SentiMix names; see data/raw/SOURCE.md).
+  raw_files:
+    train: train_14k_split_conll.txt
+    dev: dev_3k_split_conll.txt
+    test: Hindi_test_unalbelled_conll_updated.txt
+    test_labels: test_labels_hinglish.txt   # CSV: Uid,Sentiment
+
+# Fixed label map (labels are matched case-insensitively).
+labels:
+  negative: 0
+  neutral: 1
+  positive: 2
+
+# Expected split sizes and label counts (published SentiMix Hinglish statistics).
+expected:
+  sizes: {train: 14000, dev: 3000, test: 3000}
+  label_counts:
+    train: {positive: 4634, negative: 4102, neutral: 5264}
+    dev:   {positive: 982,  negative: 890,  neutral: 1128}
+    test:  {positive: 1000, negative: 900,  neutral: 1100}
+
+# Language tags. Tags are upper-cased when parsed.
+lang_tags:
+  hindi: [HIN]
+  english: [ENG]
+  language_independent: [O, EMT]
+
+models:
+  mbert: bert-base-multilingual-cased
+  muril: google/muril-base-cased
+  hingbert: l3cube-pune/hing-bert
+
+training:
+  epochs: 4
+  max_length: 128
+  batch_size: 32
+  grad_accum: 1
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  lr_grid: [2.0e-5, 3.0e-5, 5.0e-5]
+  lr_search_seed: 42
+  final_seeds: [42, 43, 44, 45, 46]
+  learning_curve:
+    fractions: [0.1, 0.25, 0.5, 1.0]
+    seeds: [42, 43, 44]
+
+svm:
+  C_grid: [0.01, 0.03, 0.1, 0.3, 1, 3]
+  seeds: [42, 43, 44]
+  word_ngram: [1, 2]
+  char_ngram: [2, 5]
+  min_df: 2
+
+evaluation:
+  bootstrap_resamples: 10000
+  bootstrap_seed: 0
