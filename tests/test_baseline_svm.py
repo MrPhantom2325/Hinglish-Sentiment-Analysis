@@ -39,6 +39,7 @@ def toy():
 def test_run_name_and_metrics():
     assert run_name("svm", "C0.1", 42) == "svm_C0.1_42"
     assert run_name("mbert", "2e-05", 43, 0.25) == "mbert_2e-05_43_frac0.25"
+    assert run_name("mbert", "2e-05", 42, 0.02, max_steps=20) == "mbert_2e-05_42_frac0.02_steps20"
     m = compute_metrics([0, 1, 2, 2], [0, 1, 2, 1])
     assert m["accuracy"] == pytest.approx(0.75)
 

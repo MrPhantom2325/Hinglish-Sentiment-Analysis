@@ -1,12 +1,14 @@
 """Shared helpers: config, logging, paths, seeding, metrics and the standard output files.
 
 Every model (SVM and transformers) writes the same two files per run:
-    results/preds/preds_{model}_{lr}_{seed}[_frac{f}].csv
+    results/preds/preds_{model}_{lr}_{seed}[_frac{f}][_steps{n}].csv
         columns: id, split, gold, pred, score_neg, score_neu, score_pos   (dev and test rows)
-    results/metrics/run_{model}_{lr}_{seed}[_frac{f}].json
+    results/metrics/run_{model}_{lr}_{seed}[_frac{f}][_steps{n}].json
         config, dev/test macro-F1 and accuracy, training time, device
 `gold` and `pred` are label ids from the fixed label map (negative=0, neutral=1, positive=2).
 For the SVM the `lr` slot holds the regularization constant, e.g. "C0.1".
+`_frac{f}` marks learning-curve runs (train fraction < 1); `_steps{n}` marks smoke/sanity runs
+cut short with --max_steps, so they can never be mistaken for (or block) a full run.
 """
 
 from __future__ import annotations
@@ -83,6 +85,17 @@ def set_seed(seed: int) -> None:
         pass
 
 
+def get_device() -> str:
+    """Best available device: 'cuda', then 'mps' (Apple Silicon), then 'cpu'."""
+    import torch
+
+    if torch.cuda.is_available():
+        return "cuda"
+    if torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
+
+
 # --------------------------------------------------------------------------- metrics
 
 
@@ -102,11 +115,13 @@ def format_lr(lr: float) -> str:
     return f"{lr:.0e}"
 
 
-def run_name(model: str, lr: str, seed: int, fraction: float = 1.0) -> str:
-    """'{model}_{lr}_{seed}' plus '_frac{f}' for learning-curve runs (fraction < 1)."""
+def run_name(model: str, lr: str, seed: int, fraction: float = 1.0, max_steps: int = -1) -> str:
+    """'{model}_{lr}_{seed}' + '_frac{f}' if fraction < 1 + '_steps{n}' if cut short by max_steps."""
     name = f"{model}_{lr}_{seed}"
     if fraction < 1.0:
         name += f"_frac{fraction:g}"
+    if max_steps > 0:
+        name += f"_steps{max_steps}"
     return name
 
 
@@ -132,11 +147,17 @@ def predictions_frame(
 
 
 def write_predictions(path: Path, frames: Iterable[pd.DataFrame]) -> None:
-    """Concatenate per-split prediction frames and write the standard CSV."""
+    """Concatenate per-split prediction frames and write the standard CSV.
+
+    Written to a temporary file first and then renamed, so an interrupted run (e.g. a Colab
+    disconnect) never leaves a half-written file that would look like a finished run.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     df = pd.concat(list(frames), ignore_index=True)
     assert list(df.columns) == PRED_COLUMNS
-    df.to_csv(path, index=False)
+    tmp = path.with_name(path.name + ".tmp")
+    df.to_csv(tmp, index=False)
+    os.replace(tmp, path)
 
 
 def read_predictions(path: Path) -> pd.DataFrame:

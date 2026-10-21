@@ -7,6 +7,8 @@ results/preds/*
 !results/preds/.gitkeep
 # Run JSONs are small; tracked for now. Uncomment to stop tracking them:
 # results/metrics/*.json
+# Smoke/sanity runs cut short with --max_steps are never part of the results.
+results/metrics/*_steps*.json
 checkpoints/
 outputs/
 wandb/

@@ -51,6 +51,10 @@ training:
   weight_decay: 0.01
   lr_grid: [2.0e-5, 3.0e-5, 5.0e-5]
   lr_search_seed: 42
+  # --train_fraction subsamples train (stratified) with this fixed seed, so every model and
+  # every run seed sees the same subset at a given fraction.
+  subsample_seed: 0
+  checkpoint_dir: checkpoints   # temporary; deleted after each run unless --keep_checkpoint
   final_seeds: [42, 43, 44, 45, 46]
   learning_curve:
     fractions: [0.1, 0.25, 0.5, 1.0]
