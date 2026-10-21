@@ -1,0 +1,44 @@
+{
+  "model": "svm_tags",
+  "search_seed": 42,
+  "grid": [
+    {
+      "C": 0.01,
+      "dev_macro_f1": 0.5894884813518004,
+      "dev_accuracy": 0.5943333333333334,
+      "converged": true
+    },
+    {
+      "C": 0.03,
+      "dev_macro_f1": 0.6099788758993383,
+      "dev_accuracy": 0.611,
+      "converged": true
+    },
+    {
+      "C": 0.1,
+      "dev_macro_f1": 0.6152200261808186,
+      "dev_accuracy": 0.6136666666666667,
+      "converged": true
+    },
+    {
+      "C": 0.3,
+      "dev_macro_f1": 0.5995690246895866,
+      "dev_accuracy": 0.597,
+      "converged": true
+    },
+    {
+      "C": 1,
+      "dev_macro_f1": 0.5897959650851831,
+      "dev_accuracy": 0.586,
+      "converged": true
+    },
+    {
+      "C": 3,
+      "dev_macro_f1": 0.5745742992936139,
+      "dev_accuracy": 0.57,
+      "converged": true
+    }
+  ],
+  "best_C": 0.1,
+  "timestamp": "2026-10-22T02:28:45"
+}

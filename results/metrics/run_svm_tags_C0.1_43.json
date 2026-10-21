@@ -1,0 +1,33 @@
+{
+  "model": "svm_tags",
+  "lr": "C0.1",
+  "seed": 43,
+  "fraction": 1.0,
+  "phase": "final",
+  "config": {
+    "C": 0.1,
+    "class_weight": "balanced",
+    "lang_tags": true,
+    "word_ngram": [
+      1,
+      2
+    ],
+    "char_ngram": [
+      2,
+      5
+    ],
+    "min_df": 2,
+    "word_token_pattern": "\\S+",
+    "n_features_word": 41765,
+    "n_features_char": 68402,
+    "converged": true
+  },
+  "dev_macro_f1": 0.6152200261808186,
+  "dev_accuracy": 0.6136666666666667,
+  "test_macro_f1": 0.6889934146103096,
+  "test_accuracy": 0.6863333333333334,
+  "train_time_sec": 4.36,
+  "device": "cpu",
+  "n_train": 14000,
+  "timestamp": "2026-10-22T02:28:48"
+}

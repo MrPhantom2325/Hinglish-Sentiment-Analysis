@@ -1,0 +1,44 @@
+{
+  "model": "svm",
+  "search_seed": 42,
+  "grid": [
+    {
+      "C": 0.01,
+      "dev_macro_f1": 0.5950673614730363,
+      "dev_accuracy": 0.5996666666666667,
+      "converged": true
+    },
+    {
+      "C": 0.03,
+      "dev_macro_f1": 0.6114108609051269,
+      "dev_accuracy": 0.6123333333333333,
+      "converged": true
+    },
+    {
+      "C": 0.1,
+      "dev_macro_f1": 0.6214853441545186,
+      "dev_accuracy": 0.6203333333333333,
+      "converged": true
+    },
+    {
+      "C": 0.3,
+      "dev_macro_f1": 0.6073359178319575,
+      "dev_accuracy": 0.6046666666666667,
+      "converged": true
+    },
+    {
+      "C": 1,
+      "dev_macro_f1": 0.5889411047143189,
+      "dev_accuracy": 0.5853333333333334,
+      "converged": true
+    },
+    {
+      "C": 3,
+      "dev_macro_f1": 0.5762714930320455,
+      "dev_accuracy": 0.572,
+      "converged": true
+    }
+  ],
+  "best_C": 0.1,
+  "timestamp": "2026-10-22T02:28:20"
+}
