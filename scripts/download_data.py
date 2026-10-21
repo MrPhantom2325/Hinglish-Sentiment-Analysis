@@ -189,7 +189,9 @@ def write_source_md(counts: dict[str, dict[str, int]]) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument("--force", action="store_true", help="re-download even if files exist")
     parser.add_argument("--verify-only", action="store_true", help="skip downloading")
     args = parser.parse_args()

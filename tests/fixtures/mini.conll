@@ -1,0 +1,52 @@
+meta	1	positive
+@	O
+abhisar	Hin
+_	O
+sharma	Hin
+bahut	Hin
+accha	Hin
+movie	Eng
+hai	Hin
+😂	EMT
+
+meta	2	Negative
+#	O
+videsh	Hin
+_	O
+mantri	Hin
+worst	ENG
+decision	eng
+https	Eng
+//	O
+t	Eng
+.	O
+co	Hin
+/	O
+AbC123xYz	Hin
+
+meta	3	neutral
+  kya  	 HIN
+scene	Eng
+hai	Hin
+ 	O
+missingtag
+meta	4	positive
+@	O
+KylieD	Eng
+_	O
+https	Eng
+//	O
+tco	Eng
+/	O
+Yh9F71	Eng
+yaar	Hin
+
+meta	5	negative
+!!!	O
+😡	EMT
+
+meta	6	neutral
+Ohho	Hin
+https	Eng
+â€¦	O
+ðŸ˜‚	EMT

@@ -26,6 +26,11 @@ expected:
     dev:   {positive: 982,  negative: 890,  neutral: 1128}
     test:  {positive: 1000, negative: 900,  neutral: 1100}
 
+# The test file has UTF-8 text mis-decoded as Windows-1252 ("â€¦" for "…", "ðŸ˜‚" for 😂)
+# in ~2/3 of its tweets; train/dev have none. src/data.py repairs it when this is true.
+preprocessing:
+  fix_mojibake: true
+
 # Language tags. Tags are upper-cased when parsed.
 lang_tags:
   hindi: [HIN]
